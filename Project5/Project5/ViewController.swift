@@ -17,6 +17,7 @@ class ViewController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(PromptForAnswer))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(Refresh))
+        
         var countSet = Set<Int>()
         if let startWordsUrl = Bundle.main.url(forResource: "start", withExtension: "txt"){
             if let  startWords = try? String(contentsOf: startWordsUrl){
