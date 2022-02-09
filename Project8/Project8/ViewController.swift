@@ -14,8 +14,12 @@ class ViewController: UIViewController {
     var scoreLabel: UILabel!
     var letterButtons = [UIButton]()
     var activatedButtons = [UIButton]()
-    
-    var score = 0
+    var selectedCorrectButtons = [UIButton]()
+    var score = 0{
+        didSet{
+            scoreLabel.text = "Score: " + String(score)
+        }
+    }
     var level = 1
     var maxWriteSyllable = 0
     
@@ -172,6 +176,10 @@ class ViewController: UIViewController {
         var indx = 0
         for syllable in shuffeledSyllableArray {
             letterButtons[indx].setTitle(syllable, for: .normal)
+            
+            letterButtons[indx].layer.borderColor = UIColor.gray.cgColor
+            letterButtons[indx].layer.cornerRadius = CGFloat(15)
+            letterButtons[indx].layer.borderWidth = 0.5
             indx += 1
         }
         
@@ -187,6 +195,7 @@ class ViewController: UIViewController {
 
     @objc func LetterTapped (_ sender: UIButton){
         if maxWriteSyllable < 3{
+            selectedCorrectButtons.append(sender)
             currentAnswer.text! += sender.titleLabel!.text!
             sender.isHidden = true
             activatedButtons.append(sender)
@@ -202,9 +211,19 @@ class ViewController: UIViewController {
     
     @objc func SubmitTapped (_ sender: UIButton){
         var i = 0
+        for que in answeredQues {
+            if currentAnswer.text!+"\n" == que{
+                ClearTapped(nil)
+                return
+            }
+        }
         for answer in answersArray {
             if currentAnswer.text! == answer{
                 score+=10
+                for selectedCorrectButton in selectedCorrectButtons {
+                    selectedCorrectButton.backgroundColor = .green
+                }
+                selectedCorrectButtons.removeAll()
                 answeredQues[i] = answer+"\n"
                 ClearTapped(nil)
                 break
@@ -213,10 +232,11 @@ class ViewController: UIViewController {
         }
         if i==7{
             score-=5
-            
+            let ac = UIAlertController(title: "Wrong Answer", message: "Your answer is a wrong. Try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
         }
         
-        scoreLabel.text! = "Score: " + String(score)
         answerslabel.text! = "\n"
         
         for answeredQue in answeredQues {
