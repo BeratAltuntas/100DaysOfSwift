@@ -14,6 +14,22 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         title="Görseller"
         navigationController?.navigationBar.prefersLargeTitles=true
+        // PROJE 9 CHALLENGE KODLARI DEĞİŞTİRMEDEN ÖNCEKİ HALİ
+//        let fm=FileManager.default
+//        let path=Bundle.main.resourcePath!
+//        let items=try! fm.contentsOfDirectory(atPath: path)
+//
+//        for item in items{
+//            if item.hasPrefix("nssl")
+//            {
+//                pictures.append(item)
+//            }
+//        }
+//        OrderBy()
+        performSelector(inBackground: #selector(GetPictures), with: nil)
+        
+    }
+    @objc func GetPictures(){
         let fm=FileManager.default
         let path=Bundle.main.resourcePath!
         let items=try! fm.contentsOfDirectory(atPath: path)
@@ -24,13 +40,10 @@ class ViewController: UITableViewController {
                 pictures.append(item)
             }
         }
-        print(pictures)
         OrderBy()
-        print(pictures)
     }
     
     func OrderBy(){
-        
         
         var i=0
         var j=i
@@ -58,16 +71,14 @@ class ViewController: UITableViewController {
                     pictures[j]=con
                 }
                 j+=1
-                
             }
             j=0
             i+=1
         }
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return pictures.count
-        
     }
 
     

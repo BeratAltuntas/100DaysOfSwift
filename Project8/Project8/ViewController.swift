@@ -132,10 +132,10 @@ class ViewController: UIViewController {
                 letterButtons.append(letterButton)
             }
         }
-        SplitWords(nil)
+        performSelector(inBackground: #selector(SplitWords), with: nil)
     }
     
-    func SplitWords(_ action: UIAlertAction?){
+    @objc func SplitWords(_ action: UIAlertAction?){
         
         var allWords = [String]()
         if let wordsPath = Bundle.main.path(forResource: "level"+String(level), ofType: ".txt"){
@@ -158,10 +158,10 @@ class ViewController: UIViewController {
             cluesArray.append(String(splited[1]))
             count += 1
         }
-        ChangeTextsAndLabels()
+        performSelector(onMainThread: #selector(ChangeTextsAndLabels), with: nil, waitUntilDone: false)
     }
     
-    func ChangeTextsAndLabels(){
+    @objc func ChangeTextsAndLabels(){
         cluesLabels.text! = "\n"
         answerslabel.text! = "\n"
         
@@ -182,14 +182,10 @@ class ViewController: UIViewController {
             letterButtons[indx].layer.borderWidth = 0.5
             indx += 1
         }
-        
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
 
@@ -283,6 +279,5 @@ class ViewController: UIViewController {
         
         
     }
-    
 }
 

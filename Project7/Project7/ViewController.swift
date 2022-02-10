@@ -34,6 +34,7 @@ class ViewController: UITableViewController {
         let ac = UIAlertController(title: "Aranacak metini giriniz.", message: nil, preferredStyle: .alert)
         ac.addTextField()
         ac.addAction(UIAlertAction(title: "Vazgeç", style: .default, handler: GetBackAllPetitions))
+        
         let searchAction = UIAlertAction(title: "Ara", style: .default){
             [weak self, weak ac] _ in
             guard let searchingWord = ac?.textFields?[0].text else{ return }
@@ -49,7 +50,7 @@ class ViewController: UITableViewController {
     }
     
     //temppetition içeriginde arama yapıyor
-    func FilteringPetitions(_ word: String){
+    @objc func FilteringPetitions(_ word: String){
         FiltredPetition.removeAll()
         tempPetitions = petitions
         var found = 0
