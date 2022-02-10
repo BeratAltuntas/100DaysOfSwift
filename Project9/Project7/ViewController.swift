@@ -12,24 +12,38 @@ class ViewController: UITableViewController {
     var tempPetitions = [Petition]()
     var FiltredPetition = [Petition]()
     
-    let urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
-    
+    var urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self,action: #selector(ShowSourceFromWhere))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(RightBarButtonForText))
-        
+//        DispatchQueue.global(qos: .userInitiated).async
+//        { [weak self] in
+//            guard let urlstr = self?.urlString else{return}
+//            if let url = URL(string: urlstr){
+//                if let data = try? Data(contentsOf: url){
+//                    self?.parse(json: data)
+//                    return
+//                }
+//            }
+//            self?.ShowError()
+//        }
+        performSelector(inBackground: #selector(FetchJson), with: nil)
+    }
+    
+    @objc func FetchJson(){
         if let url = URL(string: urlString){
-            if let data = try? Data(contentsOf: url){
-                parse(json: data)
-                return
-            }
-        }
-        ShowError()
+             if let data = try? Data(contentsOf: url){
+                 parse(json: data)
+                 return
+                 }
+             }
+        performSelector(onMainThread: #selector(ShowError), with: nil, waitUntilDone: false)
     }
     
     
+
     @objc func RightBarButtonForText(){
         let ac = UIAlertController(title: "Aranacak metini giriniz.", message: nil, preferredStyle: .alert)
         ac.addTextField()
@@ -43,6 +57,8 @@ class ViewController: UITableViewController {
         ac.addAction(searchAction)
         present(ac, animated: true)
     }
+    
+    
     func GetBackAllPetitions(_ action: UIAlertAction){
         tempPetitions = petitions
         tableView.reloadData()
@@ -74,19 +90,23 @@ class ViewController: UITableViewController {
         present(ac, animated: true)
     }
     
-    public func ShowError(){
+    @objc func ShowError(){
         let ac = UIAlertController(title: "Bağlantı Hatası", message: "Bağlantı kurulurken bir hata meydana geldi. Lütfen bağlantınızı kontrol ediniz ve tekrar deneyiniz.", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Tamam", style: .default))
         present(ac, animated: true)
     }
     
-    public func parse(json: Data){
+    @objc func parse(json: Data){
         let decoder = JSONDecoder()
         if let jsonPetitions = try? decoder.decode(Petitions.self, from: json)
         {
             petitions = jsonPetitions.results
             tempPetitions = jsonPetitions.results
-            tableView.reloadData()
+            
+            tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+        }
+        else{
+            performSelector(onMainThread: #selector(ShowError), with: nil, waitUntilDone: false)
         }
     }
     
