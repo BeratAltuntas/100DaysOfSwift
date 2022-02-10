@@ -148,7 +148,7 @@ func checkPassword(_ password:String) throws -> Bool{
         throw PasswordError.obvious
     }
 
-        
+
 }
 do{
     try checkPassword("password")
@@ -236,7 +236,7 @@ print(kisi1.getId(pass: "123421"))
 
 
 //Creating Class ---  CLASS
- 
+
 class Dogs{
     var name:String
     var kind:String
@@ -256,8 +256,8 @@ class Kanis:Dogs{
 var kopek1=Kanis(name: "kaniş köpek",heigth:13)
 
 print(kopek1.heigth)
- 
- 
+
+
 //Override -- CLASS
 class Dogs{
     func MakeNoise(){
@@ -290,7 +290,7 @@ var singerChange=singer1
 singerChange.name="Justin Bieber"
 
 print(singer1.name)
- 
+
 
 
 // Deinitialize Class ---- Class
@@ -300,7 +300,7 @@ class Person{
     init(){
         print(" \(name) doğdu")
     }
-    
+
     func merhaba(){
         print("Merhaba Ben \(name)")
     }
@@ -313,10 +313,10 @@ for _ in 1...4{
     let brt=Person()
     brt.merhaba()
 }
- 
 
 
- 
+
+
 class Singer{
     var name="ed Sheeran"
 }
@@ -325,10 +325,10 @@ print(singer.name)
 singer.name="taylor swift"
 print(singer.name)
 
- 
- 
+
+
 // Extensions uzantılar
- 
+
 extension Int {
     var isEven:Bool{
         return self%2==0
@@ -348,7 +348,7 @@ let beatles=Set(["John","Paul","George","Ringo"])
 extension Collection{
     func summarize(){
         print("There are \(count) of us:")
-        
+
         for name in self{
             print(name)
         }
@@ -358,7 +358,7 @@ extension Collection{
 python.summarize()
 beatles.summarize()
 
- 
+
 
 // Protocol-orianted Programing
 
@@ -390,13 +390,13 @@ if let unwarapped=name {
 else {
     print("missing data")
 }
- 
+
 
 
 
 // TypeCasting
 class Animal{
-    
+
 }
 class Fishs:Animal{
     func MakeBubble(){
@@ -415,8 +415,14 @@ for pet in pets{
     if let dog=pet as? Dogs{
         dog.MakeNoise()
     }
-    
+
     if let fish=pet as? Fishs{
         fish.MakeBubble()
     }
 }
+
+let racers=["Paul","Seth","Jack","Mack","John"]
+for (racerRank, racerName) in racers.enumerated(){
+    print(racerName," isimli yarış pilotu yarışı ",racerRank+1,". sırada bitirdi.")
+}
+
