@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4414ACB27C91C290080C7EF /* FireParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4414ACA27C91C290080C7EF /* FireParticles.sks */; };
+		F4414ACD27C91D7B0080C7EF /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4414ACC27C91D7B0080C7EF /* MyParticle.sks */; };
 		F47897DE27C5336000CA4AE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47897DD27C5336000CA4AE7 /* AppDelegate.swift */; };
 		F47897E027C5336000CA4AE7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F47897DF27C5336000CA4AE7 /* GameScene.sks */; };
 		F47897E427C5336000CA4AE7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47897E327C5336000CA4AE7 /* GameScene.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F4414ACA27C91C290080C7EF /* FireParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticles.sks; sourceTree = "<group>"; };
+		F4414ACC27C91D7B0080C7EF /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		F47897DA27C5336000CA4AE7 /* Project11.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project11.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F47897DD27C5336000CA4AE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F47897DF27C5336000CA4AE7 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -60,9 +64,11 @@
 				F47897DD27C5336000CA4AE7 /* AppDelegate.swift */,
 				F47897DF27C5336000CA4AE7 /* GameScene.sks */,
 				F47897E327C5336000CA4AE7 /* GameScene.swift */,
+				F4414ACC27C91D7B0080C7EF /* MyParticle.sks */,
 				F47897E527C5336000CA4AE7 /* GameViewController.swift */,
 				F47897E727C5336000CA4AE7 /* Main.storyboard */,
 				F47897EA27C5336100CA4AE7 /* Assets.xcassets */,
+				F4414ACA27C91C290080C7EF /* FireParticles.sks */,
 				F47897EC27C5336100CA4AE7 /* LaunchScreen.storyboard */,
 			);
 			path = Project11;
@@ -127,7 +133,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F47897E927C5336000CA4AE7 /* Main.storyboard in Resources */,
+				F4414ACD27C91D7B0080C7EF /* MyParticle.sks in Resources */,
 				F47897E027C5336000CA4AE7 /* GameScene.sks in Resources */,
+				F4414ACB27C91C290080C7EF /* FireParticles.sks in Resources */,
 				F47897EB27C5336100CA4AE7 /* Assets.xcassets in Resources */,
 				F47897EE27C5336100CA4AE7 /* LaunchScreen.storyboard in Resources */,
 			);

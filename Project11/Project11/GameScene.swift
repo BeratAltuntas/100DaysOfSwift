@@ -8,6 +8,7 @@
 import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreLabel: SKLabelNode!
+    var currentLiveBalls = 0
     var score = 0 {
         didSet{
             scoreLabel.text = "Score \(score)"
@@ -24,6 +25,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
+    
     override func didMove(to view: SKView) {
         
         let background = SKSpriteNode(imageNamed: "background")
@@ -61,7 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {return}
+        guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let objects = nodes(at: location)
         
@@ -75,20 +78,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let box = SKSpriteNode(color: UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1), size: size)
                 box.zRotation = CGFloat.random(in: 0...3)
                 box.position = location
+                box.name = "box"
                 box.physicsBody = SKPhysicsBody(rectangleOf: box.size)
                 box.physicsBody?.isDynamic = false
                 addChild(box)
                 
             }else{
-                let ball = SKSpriteNode(imageNamed: "ballRed")
-                ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2)
-                ball.physicsBody?.restitution = 0.5 // sıçrama
-                ball.physicsBody?.contactTestBitMask = ball.physicsBody?.collisionBitMask ?? 0
-                
-                ball.position = location
-                ball.zPosition = 2
-                ball.name = "ball"
-                addChild(ball)
+                if currentLiveBalls < 5{
+                    var balls = ["ballBlue","ballCyan","ballGreen","ballGrey","ballPurple","ballRed","ballYellow"]
+                    balls.shuffle()
+                    let ball = SKSpriteNode(imageNamed: balls[Int.random(in: 0...6)])
+                    ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2)
+                    ball.physicsBody?.restitution = 0.5 // sıçrama
+                    ball.physicsBody?.contactTestBitMask = ball.physicsBody?.collisionBitMask ?? 0
+                    ball.position = CGPoint(x: location.x, y: CGFloat.random(in: 450...700))
+                    ball.zPosition = 2
+                    ball.name = "ball"
+                    addChild(ball)
+                    currentLiveBalls+=1
+                }
             }
         }
     }
@@ -139,17 +147,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func Collision(between ball: SKNode, object: SKNode){
         if object.name == "good"{
-            Destroy(ball: ball)
+            Destroy(ball: ball,isGood: true)
             score += 1
         }
         else if object.name == "bad" {
-            Destroy(ball: ball)
+            Destroy(ball: ball, isGood: false)
             score -= 1
+        }
+        else if object.name == "box" && ball.name != "box" {
+            Destroy(ball: object, isGood: true)
+            Destroy(ball: ball, isGood: false)
         }
     }
     
-    func Destroy(ball:SKNode){
+    func Destroy(ball:SKNode, isGood: Bool){
+        var fileName:String
+        if isGood{
+            fileName = "MyParticle"
+        }else{
+            fileName = "FireParticles"
+        }
+        
+        if let fireParticle = SKEmitterNode(fileNamed: fileName){
+            fireParticle.position = ball.position
+            addChild(fireParticle)
+        }
         ball.removeFromParent()
+        currentLiveBalls-=1
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
@@ -160,6 +184,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             Collision(between: nodeA, object: nodeB)
         }
         else if nodeB.name == "ball" {
+            Collision(between: nodeB, object: nodeA)
+        }
+        else if nodeA.name == "box" {
+            Collision(between: nodeA, object: nodeB)
+        }
+        else if nodeB.name == "box" {
             Collision(between: nodeB, object: nodeA)
         }
     }
