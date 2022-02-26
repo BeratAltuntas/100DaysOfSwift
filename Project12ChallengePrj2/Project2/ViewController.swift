@@ -43,7 +43,6 @@ class ViewController: UIViewController {
             countries.shuffle()
             correctAnswer=Int.random(in: 0...2)
             title=countries[correctAnswer].uppercased() + " Score :\(score)"
-            
             button1.setImage(UIImage(named: countries[0]), for: .normal)
             button2.setImage(UIImage(named: countries[1]), for: .normal)
             button3.setImage(UIImage(named: countries[2]), for: .normal)
@@ -75,7 +74,7 @@ class ViewController: UIViewController {
         var popupTitle=title
         switch status{
             case 0:
-                message="Score =\(score)"
+                message="Your Latest Score =\(score)"
                 buttonTitle="Continue"
                 popupTitle="Your Score"
             case 1:
@@ -83,9 +82,19 @@ class ViewController: UIViewController {
                 buttonTitle="Okay"
                 popupTitle=title
             case 2:
-                message="You're answered 10. question and its youre Score :\(score)"
+                _ = SaveTheHighestScore(isGet: false)
+                message = """
+                    You're answered 10. question
+                    You're Score :\(score)
+                    You're last game score :   \(LatestScore(isGet: true) ?? 0)
+                    You're Highest score : \(SaveTheHighestScore(isGet: true) ?? 0)
+                """
                 buttonTitle="Okay"
                 popupTitle="Game Over"
+                _ = LatestScore(isGet: false)
+               
+                RestartTheGame()
+                
             default:
                 print("hata")
             }
@@ -100,9 +109,39 @@ class ViewController: UIViewController {
         }
         present(ac,animated: true)
     }
+    
    @objc func ShowScore()
     {
         PopUp(0,correct:false)
+    }
+    
+    func LatestScore(isGet: Bool)-> Int?{
+        let defaults = UserDefaults.standard
+        if isGet{
+            return defaults.integer(forKey: "LatestScore")
+        }else{
+            defaults.set(score, forKey: "LatestScore")
+        }
+        return nil
+    }
+    
+    func SaveTheHighestScore(isGet: Bool) -> Int? {
+        let defaults = UserDefaults.standard
+        if isGet{
+            return defaults.integer(forKey: "HighestScore")
+        }
+        else{
+            if defaults.integer(forKey: "HighestScore") < score{
+                defaults.set(score, forKey: "HighestScore")
+            }
+        }
+        return nil
+    }
+    func RestartTheGame(){
+        score=0
+        correctAnswer=0
+        askedQues=0
+        countries.shuffle()
     }
 
 }
