@@ -28,19 +28,35 @@ class ViewController: UITableViewController {
         if allWordsInTheText.isEmpty{
             allWordsInTheText = ["silkworm"]
         }
-        print(countSet.count)
         
-        StartGame()
+        StartGame(isBegin: true)
+    
     }
     
-    func StartGame(){
-        title = allWordsInTheText.randomElement()
-        usedWords.removeAll(keepingCapacity: true)
+    func StartGame(isBegin: Bool){
+        let defaults = UserDefaults.standard
+        if isBegin{
+            title = defaults.string(forKey: "Title") ?? allWordsInTheText.randomElement()
+            defaults.set(title, forKey: "Title")
+            usedWords.removeAll(keepingCapacity: true)
+            usedWords = defaults.stringArray(forKey: "UsedWords") ?? [String]()
+            
+        }else{
+            defaults.removeObject(forKey: "UsedWords")
+            title = allWordsInTheText.randomElement()
+            defaults.set(title, forKey: "Title")
+            usedWords.removeAll(keepingCapacity: true)
+            usedWords = defaults.stringArray(forKey: "UsedWords") ?? [String]()
+        }
         tableView.reloadData()
     }
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usedWords.count
     }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Word" ,for: indexPath)
         cell.textLabel?.text = usedWords[indexPath.row]
@@ -62,7 +78,7 @@ class ViewController: UITableViewController {
     }
     
     @objc func Refresh(){
-        StartGame()
+        StartGame(isBegin: false)
     }
     
     func Submit(_ answer: String){
@@ -76,6 +92,7 @@ class ViewController: UITableViewController {
                         
                         let indexPath = IndexPath(row: 0, section: 0)
                         tableView.insertRows(at: [indexPath], with: .middle)
+                        SaveTheUsedWords()
                         return
                     }else{
                         ShowErrorMessage(3)
@@ -150,6 +167,11 @@ class ViewController: UITableViewController {
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
-    
+    func SaveTheUsedWords(){
+        
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "UsedWords")
+        defaults.set(usedWords, forKey: "UsedWords")
+    }
 }
 
