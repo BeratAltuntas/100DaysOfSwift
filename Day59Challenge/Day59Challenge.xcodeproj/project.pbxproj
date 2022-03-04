@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4C3926C27D2690D00DBFCE3 /* countries.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4C3926B27D2690D00DBFCE3 /* countries.txt */; };
+		F4C3926E27D29C6B00DBFCE3 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3926D27D29C6B00DBFCE3 /* CountryViewController.swift */; };
 		F4FF0D0027D215EB00BA850B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF0CFF27D215EB00BA850B /* AppDelegate.swift */; };
 		F4FF0D0227D215EB00BA850B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF0D0127D215EB00BA850B /* SceneDelegate.swift */; };
 		F4FF0D0427D215EB00BA850B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF0D0327D215EB00BA850B /* ViewController.swift */; };
@@ -14,10 +16,11 @@
 		F4FF0D0927D215EB00BA850B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FF0D0827D215EB00BA850B /* Assets.xcassets */; };
 		F4FF0D0C27D215EB00BA850B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4FF0D0A27D215EB00BA850B /* LaunchScreen.storyboard */; };
 		F4FF0D1727D23E1E00BA850B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF0D1627D23E1E00BA850B /* Country.swift */; };
-		F4FF0D1927D246C700BA850B /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF0D1827D246C700BA850B /* Countries.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F4C3926B27D2690D00DBFCE3 /* countries.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = countries.txt; sourceTree = "<group>"; };
+		F4C3926D27D29C6B00DBFCE3 /* CountryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewController.swift; sourceTree = "<group>"; };
 		F4FF0CFC27D215EB00BA850B /* Day59Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Day59Challenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FF0CFF27D215EB00BA850B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4FF0D0127D215EB00BA850B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -27,7 +30,6 @@
 		F4FF0D0B27D215EB00BA850B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4FF0D0D27D215EB00BA850B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4FF0D1627D23E1E00BA850B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
-		F4FF0D1827D246C700BA850B /* Countries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				F4FF0D1427D2163400BA850B /* Controller */,
 				F4FF0D1327D2160500BA850B /* Views */,
 				F4FF0D0D27D215EB00BA850B /* Info.plist */,
+				F4C3926B27D2690D00DBFCE3 /* countries.txt */,
 			);
 			path = Day59Challenge;
 			sourceTree = "<group>";
@@ -79,9 +82,9 @@
 		F4FF0D1427D2163400BA850B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F4C3926D27D29C6B00DBFCE3 /* CountryViewController.swift */,
 				F4FF0D1627D23E1E00BA850B /* Country.swift */,
 				F4FF0D0327D215EB00BA850B /* ViewController.swift */,
-				F4FF0D1827D246C700BA850B /* Countries.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				F4FF0D0C27D215EB00BA850B /* LaunchScreen.storyboard in Resources */,
 				F4FF0D0927D215EB00BA850B /* Assets.xcassets in Resources */,
 				F4FF0D0727D215EB00BA850B /* Main.storyboard in Resources */,
+				F4C3926C27D2690D00DBFCE3 /* countries.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +175,7 @@
 				F4FF0D1727D23E1E00BA850B /* Country.swift in Sources */,
 				F4FF0D0427D215EB00BA850B /* ViewController.swift in Sources */,
 				F4FF0D0027D215EB00BA850B /* AppDelegate.swift in Sources */,
-				F4FF0D1927D246C700BA850B /* Countries.swift in Sources */,
+				F4C3926E27D29C6B00DBFCE3 /* CountryViewController.swift in Sources */,
 				F4FF0D0227D215EB00BA850B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

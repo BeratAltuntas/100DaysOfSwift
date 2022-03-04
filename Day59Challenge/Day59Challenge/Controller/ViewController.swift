@@ -10,43 +10,33 @@ import UIKit
 
 class ViewController: UITableViewController {
     var countries = [Country]()
-    var urlString = "https://www.restcountries.com/v2/all"
     override func viewDidLoad() {
         super.viewDidLoad()
-//        DispatchQueue.main.async
-//        { [weak self] in
-//            guard let urlstr = self?.urlString else{return}
-//
-//            if let url = URL(string: urlstr){
-//                if let data = try? Data(contentsOf: url){
-//                    self?.parse(json: data)
-//                    return
-//                }
-//            }
-//            self?.ShowError()
-//        }
 
-        FetchJson()
+        performSelector(onMainThread: #selector(FetchJson), with: .none, waitUntilDone: true)
     }
     
     @objc func FetchJson(){
-        if let url = URL(string: urlString){
-            if let data = try? Data(contentsOf: url, options: .alwaysMapped){
+        if let path = Bundle.main.path(forResource: "countries", ofType: "txt")
+        {
+            if let data = try? Data(contentsOf: URL(fileURLWithPath: path ), options: .mappedIfSafe){
                 parse(json: data)
                 return
             }
+            print("hata1")
         }
         performSelector(onMainThread: #selector(ShowError), with: nil, waitUntilDone: false)
     }
     @objc func parse(json: Data){
-        let decoder = JSONDecoder()
-        if let jsonCountries = try? decoder.decode(Countries.self, from: json)
+         let decoder = JSONDecoder()
+
+        if let jsonCountries = try? decoder.decode([Country].self, from: json)
         {
-            countries = jsonCountries.results
-            
-            tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+            countries = jsonCountries
+            tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: true)
         }
         else{
+            print("hata2")
             performSelector(onMainThread: #selector(ShowError), with: nil, waitUntilDone: false)
         }
     }
@@ -64,6 +54,13 @@ class ViewController: UITableViewController {
         cell.textLabel?.text = countries[indexPath.row].name
         cell.detailTextLabel?.text = countries[indexPath.row].capital
         return cell
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let countryViewController = storyboard?.instantiateViewController(withIdentifier: "Country")as? CountryViewController
+        {
+            countryViewController.country = [countries[indexPath.row].self]
+            navigationController?.pushViewController(countryViewController, animated: true)
+        }
     }
 }
 
