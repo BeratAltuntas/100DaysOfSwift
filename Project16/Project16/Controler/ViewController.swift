@@ -15,7 +15,7 @@ class ViewController: UIViewController, MKMapViewDelegate{
         super.viewDidLoad()
         let london = Capital(title: "London", coordinate: CLLocationCoordinate2D.init(latitude: 51.507222, longitude: -0.1275), info: "Home to the 2012 Summer Olympics.")
         let oslo = Capital(title: "Oslo", coordinate: CLLocationCoordinate2D.init(latitude: 59.95, longitude: 10.75), info: "Founded a thousand years ago.")
-        let paris = Capital(title: "paris", coordinate: CLLocationCoordinate2D.init(latitude: 48.8567, longitude: 2.3508), info: "Often called City Of Light.")
+        let paris = Capital(title: "Paris", coordinate: CLLocationCoordinate2D.init(latitude: 48.8567, longitude: 2.3508), info: "Often called City Of Light.")
         let rome = Capital(title: "Rome", coordinate: CLLocationCoordinate2D.init(latitude: 41.9, longitude: 12.5), info: "Has a hole country inside it.")
         let washington = Capital(title: "Washington", coordinate: CLLocationCoordinate2D.init(latitude: 38.895111, longitude: -77.036667), info: "Named after George himself")
         let ankara = Capital(title: "Ankara", coordinate: CLLocationCoordinate2D(latitude: 39.92623816924362, longitude: 32.83630856248447), info: "Heart Of The Anatolia.")
@@ -27,18 +27,22 @@ class ViewController: UIViewController, MKMapViewDelegate{
         guard annotation is Capital else{return nil}
         let identifier = "capital"
         
-        var annotionView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        
-        if annotionView == nil{
-            
-            annotionView = MKPinAnnotationView.init(annotation: annotation, reuseIdentifier: identifier)
-            annotionView?.canShowCallout = true
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        if annotationView == nil{
+            let annotationView2 = MKPinAnnotationView.init(annotation: annotation, reuseIdentifier: identifier)
+            annotationView2.pinTintColor = .systemYellow
+            annotationView2.canShowCallout = true
             let btn = UIButton(type: .detailDisclosure)
-            annotionView?.rightCalloutAccessoryView = btn
+            annotationView2.rightCalloutAccessoryView = btn
+            annotationView = MKPinAnnotationView.init(annotation: annotation, reuseIdentifier: identifier)
+            annotationView? = annotationView2
         }else{
-            annotionView?.annotation = annotation
+            annotationView?.annotation = annotation
         }
-        return annotionView
+        return annotationView
+    }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        title = view.annotation?.title!
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
