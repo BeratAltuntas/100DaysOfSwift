@@ -42,7 +42,6 @@ class ViewController: UITableViewController {
             tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: true)
         }
         else{
-            print("hata2")
             performSelector(onMainThread: #selector(ShowError), with: nil, waitUntilDone: false)
         }
     }
