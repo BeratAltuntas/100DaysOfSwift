@@ -17,6 +17,7 @@ class CountryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         tableView.delegate = self
         tableView.dataSource = self
         let imageUrl = country[0].flags.png
@@ -57,10 +58,11 @@ class CountryViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
-    
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
+    
+   
                                            
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listOfTableViewSeen.count
