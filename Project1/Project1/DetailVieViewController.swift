@@ -15,6 +15,8 @@ class DetailVieViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //project18 Challenge
+        assert(selectedImage != nil, "Resim Seçilmeden geldi.")
         title = "\(selectedImgIndex!) / \(imageCount!)"
         navigationItem.largeTitleDisplayMode = .never
         if let imageToLoad=selectedImage{

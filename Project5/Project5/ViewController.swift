@@ -66,8 +66,9 @@ class ViewController: UITableViewController {
     }
     
     func Submit(_ answer: String){
-        let lowerAnswer = answer.lowercased()
         
+        let lowerAnswer = answer.lowercased()
+   //Project18 Condition breakpoints are writed
         if !lowerAnswer.contains(" ") && !lowerAnswer.contains("") && !lowerAnswer.isEmpty{
             if IsPossible(word: lowerAnswer){
                 if IsOriginal(word: lowerAnswer){

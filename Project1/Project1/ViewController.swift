@@ -27,7 +27,7 @@ class ViewController: UITableViewController {
 //        }
 //        OrderBy()
         performSelector(inBackground: #selector(GetPictures), with: nil)
-        
+        tableView.reloadData()
     }
     @objc func GetPictures(){
         let fm=FileManager.default
