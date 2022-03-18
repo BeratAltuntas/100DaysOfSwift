@@ -15,14 +15,22 @@ class GameScene: SKScene {
     let leftEdge = -22
     let bottomEdge = -22
     let rightEdge = 1024+22
-    
+    var scoreLabel: SKLabelNode!
     var score = 0{
         didSet{
-            
+            scoreLabel.text = "Score: \(score)"
         }
     }
     
     override func didMove(to view: SKView) {
+        scoreLabel = SKLabelNode(fontNamed: "chalkduster")
+        scoreLabel.position = CGPoint(x: 920, y: 744)
+        scoreLabel.color = .white
+        scoreLabel.fontSize = 25
+        scoreLabel.zPosition = 0
+        addChild(scoreLabel)
+        score = 0
+
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 512, y: 384)
         background.blendMode = .replace
@@ -133,16 +141,24 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         for (index,firework) in fireworks.enumerated().reversed(){
-            if firework.position.y > 900{
+            if firework.position.y > 900 || firework.position.x > 1300 || firework.position.x < -200{
                 fireworks.remove(at: index)
                 firework.removeFromParent()
             }
         }
     }
     func explode(firework:SKNode){
-        if let emit = SKEmitterNode(fileNamed: "explode"){
-            emit.position = firework.position
-            addChild(emit)
+        if let emitter = SKEmitterNode(fileNamed: "explode"){
+            emitter.position = firework.position
+        
+            addChild(emitter)
+            
+            let remove = SKAction.run {
+                emitter.removeFromParent()
+            }
+            let otherWait = SKAction.wait(forDuration: 1)
+            let otherSequence = SKAction.sequence([otherWait,remove])
+            run(otherSequence)
         }
     }
   
@@ -176,6 +192,10 @@ class GameScene: SKScene {
             score += 2500
         default:
             score += 4000
+        }
+        if score > 20000{
+            gameTimer?.invalidate()
+            
         }
     }
 }
