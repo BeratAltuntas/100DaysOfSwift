@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import NotificationCenter
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet var button1: UIButton!
     @IBOutlet var button2: UIButton!
     @IBOutlet var button3: UIButton!
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        remindToPlayGame()
         
         countries+=["estonia","france","germany","ireland","italy","monaco","nigeria","poland","russia","spain","uk","us"]
         button1.layer.borderWidth=1
@@ -104,6 +105,61 @@ class ViewController: UIViewController {
     {
         PopUp(0,correct:false)
     }
+    
+    func remindToPlayGame(){
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert,.badge,.sound]) { granted, error in
+            if granted{
+                self.registerCategories()
+                let content = UNMutableNotificationContent()
+                content.title = "What are you waiting?"
+                content.body = "Come on get in and play the game."
+                content.sound = .default
+                content.userInfo = ["customData":"data"]
+                content.categoryIdentifier = "alarm"
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: true)
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                center.add(request)
+            }
+        }
+    }
+    
+    func registerCategories(){
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        let remindMeLater = UNNotificationAction(identifier: "remindMeLater", title: "Remind Me 2 Hours Later", options: .foreground)
+        let category = UNNotificationCategory(identifier: "alarm", actions: [remindMeLater], intentIdentifiers: [])
+        center.setNotificationCategories([category])
+    }
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        
+        if let customData = userInfo["customData"] as? String{
+          
+            switch response.actionIdentifier{
+            case "remindMeLater":
+                remindMeLater()
+            default:
+                break
+            }
+        }
+    }
+    func remindMeLater(){
+        
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "We are waiting for you!!"
+        content.body = "As you promised us 2 hour is passed come on and play game."
+        content.sound = .default
+        content.categoryIdentifier = "alarm"
+    
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 7200, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+        
+    }
 }
 
