@@ -322,6 +322,8 @@
 				DEVELOPMENT_TEAM = 3F2Y7B7Z54;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Project28/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Safe Notes";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Identify yourself!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -332,11 +334,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HackingWithSwift.Project28;
+				PRODUCT_BUNDLE_IDENTIFIER = com.CbaSafeNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -350,6 +352,8 @@
 				DEVELOPMENT_TEAM = 3F2Y7B7Z54;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Project28/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Safe Notes";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Identify yourself!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -360,11 +364,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HackingWithSwift.Project28;
+				PRODUCT_BUNDLE_IDENTIFIER = com.CbaSafeNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
