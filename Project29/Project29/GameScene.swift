@@ -13,9 +13,6 @@ enum CollisionTypes: UInt32{
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
-    
-    
     var player1: SKSpriteNode!
     var player2: SKSpriteNode!
     var banana: SKSpriteNode!
@@ -40,8 +37,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player2ScoreLabel.text = "Player2 Score: \(player2Score)"
         }
     }
-    
-    
     var currentPlayer = 1
     
     var buildings = [BuildingNode]()
