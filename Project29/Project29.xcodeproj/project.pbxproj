@@ -15,6 +15,8 @@
 		F4A85C7627F8E8A500780C80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4A85C7527F8E8A500780C80 /* Assets.xcassets */; };
 		F4A85C7927F8E8A500780C80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4A85C7727F8E8A500780C80 /* LaunchScreen.storyboard */; };
 		F4A85C8027F8E96200780C80 /* BuildingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A85C7F27F8E96200780C80 /* BuildingNode.swift */; };
+		F4C5FD7327F9E03C00D77F93 /* hitPlayer.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4C5FD7127F9E03C00D77F93 /* hitPlayer.sks */; };
+		F4C5FD7427F9E03C00D77F93 /* hitBuilding.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4C5FD7227F9E03C00D77F93 /* hitBuilding.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		F4A85C7527F8E8A500780C80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4A85C7827F8E8A500780C80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4A85C7F27F8E96200780C80 /* BuildingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingNode.swift; sourceTree = "<group>"; };
+		F4C5FD7127F9E03C00D77F93 /* hitPlayer.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitPlayer.sks; sourceTree = "<group>"; };
+		F4C5FD7227F9E03C00D77F93 /* hitBuilding.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitBuilding.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 				F4A85C7527F8E8A500780C80 /* Assets.xcassets */,
 				F4A85C7F27F8E96200780C80 /* BuildingNode.swift */,
 				F4A85C7727F8E8A500780C80 /* LaunchScreen.storyboard */,
+				F4C5FD7227F9E03C00D77F93 /* hitBuilding.sks */,
+				F4C5FD7127F9E03C00D77F93 /* hitPlayer.sks */,
 			);
 			path = Project29;
 			sourceTree = "<group>";
@@ -131,8 +137,10 @@
 			files = (
 				F4A85C7427F8E8A400780C80 /* Main.storyboard in Resources */,
 				F4A85C6B27F8E8A400780C80 /* GameScene.sks in Resources */,
+				F4C5FD7327F9E03C00D77F93 /* hitPlayer.sks in Resources */,
 				F4A85C7627F8E8A500780C80 /* Assets.xcassets in Resources */,
 				F4A85C7927F8E8A500780C80 /* LaunchScreen.storyboard in Resources */,
+				F4C5FD7427F9E03C00D77F93 /* hitBuilding.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
