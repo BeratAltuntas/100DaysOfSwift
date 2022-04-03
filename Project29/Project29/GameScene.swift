@@ -1,9 +1,9 @@
-//
-//  GameScene.swift
-//  Project29
-//
-//  Created by BERAT ALTUNTAŞ on 2.04.2022.
-//
+    //
+    //  GameScene.swift
+    //  Project29
+    //
+    //  Created by BERAT ALTUNTAŞ on 2.04.2022.
+    //
 
 import SpriteKit
 enum CollisionTypes: UInt32{
@@ -13,10 +13,34 @@ enum CollisionTypes: UInt32{
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
- 
+    
+    
+    
     var player1: SKSpriteNode!
     var player2: SKSpriteNode!
     var banana: SKSpriteNode!
+    
+    var player1ScoreLabel: SKLabelNode!
+    var player2ScoreLabel: SKLabelNode!
+    var gameOverLabel: SKLabelNode!
+    var player1Score = 0{
+        didSet{
+            let defaults = UserDefaults.standard
+            player1Score = defaults.integer(forKey: "Player1Score")
+            
+            player1ScoreLabel.text = "Player1 Score: \(player1Score)"
+        }
+    }
+    var player2Score = 0{
+        didSet{
+            let defaults = UserDefaults.standard
+            
+            player2Score = defaults.integer(forKey: "Player2Score")
+           
+            player2ScoreLabel.text = "Player2 Score: \(player2Score)"
+        }
+    }
+    
     
     var currentPlayer = 1
     
@@ -27,10 +51,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
         createBuildings()
         createPlayers()
-        
+        createScoreLabels()
         physicsWorld.contactDelegate = self
+        
+        if player1Score >= 3 || player2Score >= 3{
+            physicsWorld.speed = .zero
+            createGameOverLabel()
+        }
     }
-    
+    func createScoreLabels(){
+        player1ScoreLabel = SKLabelNode(fontNamed: "chalkduster")
+        player1ScoreLabel.fontSize = CGFloat(25)
+        player1ScoreLabel.position = CGPoint(x: 20, y: self.size.height - 80)
+        player1ScoreLabel.horizontalAlignmentMode = .left
+        player1ScoreLabel.zPosition = 1
+        addChild(player1ScoreLabel)
+        
+        player2ScoreLabel = SKLabelNode(fontNamed: "chalkduster")
+        player2ScoreLabel.fontSize = CGFloat(25)
+        player2ScoreLabel.position = CGPoint(x: self.size.width - 150, y: self.size.height - 80)
+        player2ScoreLabel.horizontalAlignmentMode = .right
+        player2ScoreLabel.zPosition = 1
+        addChild(player2ScoreLabel)
+        
+        player1Score = 0
+        player2Score = 0
+    }
     func createBuildings(){
         
         var currentX: CGFloat = -15
@@ -94,7 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createPlayers(){
         
-        // player 1
+            // player 1
         player1 = SKSpriteNode(imageNamed: "player")
         player1.name = "player1"
         player1.physicsBody = SKPhysicsBody(circleOfRadius: player1.size.width / 2)
@@ -108,7 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(player1)
         
         
-        // player 2
+            // player 2
         player2 = SKSpriteNode(imageNamed: "player")
         player2.name = "player2"
         player2.physicsBody = SKPhysicsBody(circleOfRadius: player1.size.width / 2)
@@ -166,6 +212,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeFromParent()
         banana.removeFromParent()
         
+        if player.name == "player1"{
+            let defaults = UserDefaults.standard
+            defaults.set(player2Score+1, forKey: "Player2Score")
+            player2Score += 1
+            
+        }else{
+            let defaults = UserDefaults.standard
+            defaults.set(player1Score+1, forKey: "Player1Score")
+            player1Score += 1
+            
+            
+        }
+        
+        if player1Score >= 3 || player2Score >= 3{
+            createGameOverLabel()
+        }else{
+            createNewGameScene()
+        }
+    }
+    func createNewGameScene(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let newGame = GameScene(size: self.size)
             newGame.viewController = self.viewController
@@ -177,6 +243,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let transition = SKTransition.doorway(withDuration: 1.5)
             self.view?.presentScene(newGame,transition: transition)
         }
+        
+    }
+    
+    func createGameOverLabel(){
+        gameOverLabel = SKLabelNode(fontNamed: "chalkduster")
+        gameOverLabel.text = "Game Over"
+        gameOverLabel.name = "GameOver"
+        gameOverLabel.horizontalAlignmentMode = .center
+        gameOverLabel.fontSize = CGFloat(80)
+        gameOverLabel.position = CGPoint(x: 512, y: 354)
+        gameOverLabel.zPosition = 3
+        gameOverLabel.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: gameOverLabel.frame.size.width, height: gameOverLabel.frame.size.height))
+        gameOverLabel.physicsBody?.isDynamic = false
+        addChild(gameOverLabel)
     }
     
     func changePlayer(){
@@ -206,8 +286,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         changePlayer()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else{return}
+        let location = touch.location(in: self)
+        let nodes = nodes(at: location)
+        
+        for node in nodes{
+            if node.name == "GameOver"{
+                gameOverLabel.removeFromParent()
+                let defaults = UserDefaults.standard
+                
+                defaults.set(0, forKey: "Player1Score")
+                defaults.set(0, forKey: "Player2Score")
+                player1Score = 0
+                player2Score = 0
+                createNewGameScene()
+            }
+        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         guard banana != nil else{return}
+        
         
         if abs(banana.position.y) > 1000{
             banana.removeFromParent()

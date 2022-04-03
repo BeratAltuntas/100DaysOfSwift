@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F4A85C6527F8E8A400780C80 /* Project29.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project29.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4A85C6527F8E8A400780C80 /* Throwing Banana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Throwing Banana.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A85C6827F8E8A400780C80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4A85C6A27F8E8A400780C80 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		F4A85C6E27F8E8A400780C80 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		F4A85C6627F8E8A400780C80 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4A85C6527F8E8A400780C80 /* Project29.app */,
+				F4A85C6527F8E8A400780C80 /* Throwing Banana.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,7 +94,7 @@
 			);
 			name = Project29;
 			productName = Project29;
-			productReference = F4A85C6527F8E8A400780C80 /* Project29.app */;
+			productReference = F4A85C6527F8E8A400780C80 /* Throwing Banana.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -316,7 +316,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.HackingWithSwift.Project29;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Throwing Banana";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -345,7 +345,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.HackingWithSwift.Project29;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Throwing Banana";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
